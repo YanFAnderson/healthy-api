@@ -6,7 +6,9 @@ HEALTHY API
 
 Documentation: https://documenter.getpostman.com/view/5643963/TVCb3qAV
 ### Config
-Config DB in `server/app/config/`
+Config env in `app/config/`
 
-### Tests
-API unit tests: `server/app/tests/`
+Config env type in `.env` by `NODE_ENV_TYPE`
+
+### Running
+`node server.js`
