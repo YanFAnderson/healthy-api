@@ -1,8 +1,9 @@
-const dbConfig = require("../config/db.config.js");
+require("dotenv").config();
+const config = require("../config/"+process.env.NODE_ENV_TYPE+".config.js");
 
 const Sequelize = require("sequelize");
-const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
-        dialect: dbConfig.dialect,
+const sequelize = new Sequelize(config.DB, config.USER, config.PASSWORD, {
+        dialect: config.dialect,
         define: {
             timestamps: false
         }

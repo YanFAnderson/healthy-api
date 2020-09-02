@@ -1,8 +1,10 @@
+require("dotenv").config();
+const config = require("./app/config/" + process.env.NODE_ENV_TYPE + ".config.js");
 var describe = require("mocha").describe;
 var expect = require("chai").expect;
 var request = require("request");
-const PORT = process.env.PORT || 8080;
-var api_url = "http://localhost:" + PORT + "/api";
+
+var api_url = "http://" + config.NODE_HOST + ":" + config.NODE_PORT + "/api";
 var patient_id;
 
 
