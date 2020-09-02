@@ -1,5 +1,5 @@
 require("dotenv").config();
-const config = require("./app/config/" + process.env.NODE_ENV_TYPE + ".config.js");
+const config = require("../config/" + process.env.NODE_ENV_TYPE + ".config.js");
 var describe = require("mocha").describe;
 var expect = require("chai").expect;
 var request = require("request");
