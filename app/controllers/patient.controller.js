@@ -1,5 +1,5 @@
 const db = require("../models");
-const Patient = db.patient;
+let Patient = db.patient;
 const Op = db.Sequelize.Op;
 
 exports.findAll = (req, res) => {
@@ -17,17 +17,24 @@ exports.findAll = (req, res) => {
 
 exports.create = (req, res) => {
     const patient = {
-        name: req.query.name,
-        surname: req.query.surname,
-        patronymic: req.query.patronymic,
-        gender: req.query.gender,
-        birthday: req.query.birthday,
-        address: req.query.address,
-        oms_number: req.query.oms_number
+        name: req.query.name || null,
+        surname: req.query.surname || null,
+        patronymic: req.query.patronymic || null,
+        gender: req.query.gender || null,
+        birthday: req.query.birthday || null,
+        address: req.query.address || null,
+        oms_number: req.query.oms_number || null
     };
+    Object.values(patient).forEach(function (value) {
+        if (value === null) {
+            res.status(500).send({
+                message: "Blank value!"
+            })
+        }
+    });
     Patient.create(patient)
         .then(data => {
-            res.send(data);
+            res.status(200).send(data);
         })
         .catch(err => {
             res.status(500).send({
@@ -49,7 +56,7 @@ exports.delete = (req, res) => {
     })
         .then(num => {
             if (num == 1) {
-                res.send({
+                res.status(200).send({
                     message: "Patient was deleted successfully!"
                 });
             } else {

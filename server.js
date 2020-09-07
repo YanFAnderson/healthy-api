@@ -1,5 +1,5 @@
 require("dotenv").config();
-const config = require("./app/config/"+process.env.NODE_ENV_TYPE+".config.js");
+const config = require("./app/config/" + process.env.NODE_ENV_TYPE + ".config.js");
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 const db = require("./app/models");
-db.sequelize.sync();
+db.sequelize.sync;
 
 require("./app/routes/api.routes")(app);
 

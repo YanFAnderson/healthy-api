@@ -10,7 +10,7 @@ var patient_id;
 
 describe("Patients list", function () {
     it("Normal request", function (done) {
-        var url = api_url + "/patient/list";
+        const url = api_url + "/patient/list";
         request(url, function (error, response, body) {
             if (error)
                 console.log(error);
@@ -22,7 +22,7 @@ describe("Patients list", function () {
 
 describe("Patients create", function () {
     it("Normal request", function (done) {
-        var url = api_url + "/patient/create?name=Test&surname=Test&patronymic=Test&gender=male&address=Test&birthday=2002-02-02&oms_number=1234567890123456";
+        const url = api_url + "/patient/create?name=Test&surname=Test&patronymic=Test&gender=male&address=Test&birthday=2002-02-02&oms_number=1234567890123456";
         request(url, function (error, response, body) {
             if (error)
                 console.log(error);
@@ -83,3 +83,4 @@ describe("Patients delete", function () {
         })
     })
 });
+
