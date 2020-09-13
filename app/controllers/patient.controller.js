@@ -5,7 +5,7 @@ const Op = db.Sequelize.Op;
 exports.findAll = (req, res) => {
     Patient.findAll()
         .then(data => {
-            res.send(data)
+            res.status(200).send(data)
         })
         .catch(err => {
             res.status(500).send({
@@ -17,13 +17,13 @@ exports.findAll = (req, res) => {
 
 exports.create = (req, res) => {
     const patient = {
-        name: req.query.name || null,
-        surname: req.query.surname || null,
-        patronymic: req.query.patronymic || null,
-        gender: req.query.gender || null,
-        birthday: req.query.birthday || null,
-        address: req.query.address || null,
-        oms_number: req.query.oms_number || null
+        name: req.body.name || null,
+        surname: req.body.surname || null,
+        patronymic: req.body.patronymic || null,
+        gender: req.body.gender || null,
+        birthday: req.body.birthday || null,
+        address: req.body.address || null,
+        oms_number: req.body.oms_number || null
     };
     Object.values(patient).forEach(function (value) {
         if (value === null) {
@@ -55,7 +55,7 @@ exports.delete = (req, res) => {
         where: {id: id}
     })
         .then(num => {
-            if (num == 1) {
+            if (num === 1) {
                 res.status(200).send({
                     message: "Patient was deleted successfully!"
                 });
@@ -73,18 +73,18 @@ exports.delete = (req, res) => {
 };
 
 exports.update = (req, res) => {
-    const id = req.query.id;
+    const id = req.body.id;
     if (!id) {
         res.status(500).send({
             message: "Please, specify id!"
         })
     }
-    Patient.update(req.query, {
+    Patient.update(req.body, {
         where: {id: id}
     })
         .then(num => {
-            if (num == 1) {
-                res.send({
+            if (num[0] === 1) {
+                res.status(200).send({
                     message: "Patient updated successfully!"
                 })
             } else {
@@ -125,7 +125,7 @@ exports.search = (req, res) => {
         }
     })
         .then(data => {
-            res.send(data);
+            res.status(200).send(data);
         })
         .catch(err => {
             res.status(500).send({

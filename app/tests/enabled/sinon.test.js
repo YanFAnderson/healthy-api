@@ -1,5 +1,5 @@
-process.env.NODE_ENV_TYPE = "test"
-console.log(process.env.NODE_ENV_TYPE)
+process.env.NODE_ENV_TYPE = "test";
+console.log(process.env.NODE_ENV_TYPE);
 
 const {expect, use} = require('chai');
 const request = require('request');
@@ -9,8 +9,8 @@ const sinonChai = require('sinon-chai');
 use(sinonChai);
 
 
-const mockReq = (query = {}) => {
-    return {query: query};
+const mockReq = (query = {}, body = {}) => {
+    return {query: query, body: body};
 };
 const mockRes = (expectedStatus) => {
     res = {
@@ -38,7 +38,7 @@ describe('Patients list', () => {
 
 describe('Patient create', () => {
     it('Happy path', (done) => {
-        let req = mockReq({
+        let req = mockReq({}, {
             name: "test",
             surname: "test",
             patronymic: "test",
@@ -62,7 +62,7 @@ describe('Patient create', () => {
 
 describe('Patient edit', () => {
     it('Happy path', (done) => {
-        let req = mockReq({id: "62", "name": "Test"});
+        let req = mockReq({}, {id: "62", "name": "Test"});
         let res = mockRes(200);
         patient.update(req, res);
         done()
